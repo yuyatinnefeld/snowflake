@@ -1,16 +1,9 @@
 
-
--- This SQL file is for the Hands On Lab Guide for the 30-day free Snowflake trial account
--- The numbers below correspond to the sections of the Lab Guide in which SQL is to be run in a Snowflake worksheet
--- Modules 1 and 2 of the Lab Guide have no SQL to execute
-
-
 /* *********************************************************************************** */
-/* *** MODULE 3  ********************************************************************* */
+/* *** STRUCTURED DATA (CITIBIKE) **************************************************** */
 /* *********************************************************************************** */
 
--- 3.1.4
-
+-- create a table
 create table trips 
 (tripduration integer,
   starttime timestamp,
@@ -29,124 +22,97 @@ create table trips
   birth_year integer,
   gender integer);
 
--- 3.2 
-
+-- create a stage (stage = internal snowflake storage location)
 create or replace stage citibike_trips url = 's3://snowflake-workshop-lab/citibike-trips';
 
--- 3.2.4
-
+-- show stage data
 list @citibike_trips;
 
--- 3.3
-
+-- define the csv file format
 create or replace file format csv type='csv'
   compression = 'auto' field_delimiter = ',' record_delimiter = '\n'
   skip_header = 0 field_optionally_enclosed_by = '\042' trim_space = false
   error_on_column_count_mismatch = false escape = 'none' escape_unenclosed_field = '\134'
   date_format = 'auto' timestamp_format = 'auto' null_if = ('');
 
-/* *********************************************************************************** */
-/* *** MODULE 4  ********************************************************************* */
-/* *********************************************************************************** */
 
--- 4.2.2
-
+-- import stage data into the db table
 copy into trips from @citibike_trips file_format=csv;
 
--- 4.2.4
--- create small table
-create table trips_main as (select * from trips limit 50);
+-- create a small table
+create table trips_test as (select * from trips limit 150);
+
+-- delete the original table
 truncate table trips;
 
--- 4.3
-
+-- create a dwh server "analytics_wh"
 create or replace warehouse analytics_wh with warehouse_size = 'large' warehouse_type = 'standard' 
   auto_suspend = 600 auto_resume = true;
 
-/* *********************************************************************************** */
-/* *** MODULE 5  ********************************************************************* */
-/* *********************************************************************************** */
-
--- 5.1.1
-
+-- connect the db and the dwh server
 use role sysadmin;
 use warehouse analytics_wh;
 use database citibike;
 use schema public;
 
--- 5.1.2
 
+-- preview the 20 rows
 select * from trips limit 20;
 
--- 5.1.3
 
+-- show the basic hourly statistics on Citi Bike usage
 select date_trunc('hour', starttime) as "date",
 count(*) as "num trips",
 avg(tripduration)/60 as "avg duration (mins)", 
 avg(haversine(start_station_latitude, start_station_longitude, end_station_latitude, end_station_longitude)) as "avg distance (km)" 
-from trips
+from trips_main
 group by 1 order by 1;
 
--- 5.1.4
-
-select date_trunc('hour', starttime) as "date",
-count(*) as "num trips",
-avg(tripduration)/60 as "avg duration (mins)", 
-avg(haversine(start_station_latitude, start_station_longitude, end_station_latitude, end_station_longitude)) as "avg distance (km)" 
-from trips
-group by 1 order by 1;
-
--- 5.1.5
-
+-- show the monthly activity:
 select monthname(starttime) as "month",
     count(*) as "num trips"
-from trips
+from trips_main
 group by 1 order by 2 desc;
     
 
--- 5.2.1
-
-create table trips_dev clone trips;
+-- clone table 
+create table trips_dev clone trips_test;
 
 /* *********************************************************************************** */
-/* *** MODULE 6  ********************************************************************* */
+/* *** SEMI-STRUCTURED DATA (WATHER) ************************************************* */
 /* *********************************************************************************** */
 
--- 6.1.1
-
+-- create a new db
 create database weather;
 
--- 6.1.2
-
+-- select the new db
 use role sysadmin;
 use warehouse compute_wh;
 use database weather;
 use schema public;
 
--- 6.1.3
-
+-- create a table with the semi-structured data 
+-- semi-structured data => using the special column type called VARIANT
 create table json_weather_data (v variant);
 
--- 6.2.1
-
+-- create a stage
 create stage nyc_weather url = 's3://snowflake-workshop-lab/weather-nyc';
 
--- 6.2.2 
-
+-- check the records
 list @nyc_weather;
 
--- 6.3.1
-
+-- import the stage data into the table
 copy into json_weather_data 
 from @nyc_weather 
 file_format = (type=json);
 
--- 6.3.2
-
+-- check the json data
 select * from json_weather_data limit 10;
 
--- 6.4.1
+-- create a view
+-- you can use SQL dot notation (v.city.coord.lat) to pull out
 
+values at lower levels in the JSON hierarchy 
 create view json_weather_data_view as
 select
   v:time::timestamp as observation_time,
@@ -167,50 +133,43 @@ select
 from json_weather_data
 where city_id = 5128638;
 
--- 6.4.4
-
+-- see the view
 select * from json_weather_data_view
 where date_trunc('month',observation_time) = '2018-01-01' 
 limit 20;
 
--- 6.5.1
-
-select weather as conditions
+-- join the weater table and citibike table
+select 
+    weather as conditions
     ,count(*) as num_trips
-from citibike.public.trips 
+from 
+    citibike.public.trips_test 
 left outer join json_weather_data_view
     on date_trunc('hour', observation_time) = date_trunc('hour', starttime)
 where conditions is not null
 group by 1 order by 2 desc;
 
-
-/* *********************************************************************************** */
-/* *** MODULE 7  ********************************************************************* */
-/* *********************************************************************************** */
-
--- 7.1.1
-
+-- delete the table
 drop table json_weather_data;
 
--- 7.1.2
-
+-- show the 10 records of the deleted table
 select * from json_weather_data limit 10;
 
--- 7.1.3
-
+-- restore the table = time travel
 undrop table json_weather_data;
 
--- 7.2.1
+/* *********************************************************************************** */
+/* *** ROLL BACK A TABLE **************************************************** */
+/* *********************************************************************************** */
 
+-- change the db
 use database citibike;
 use schema public;
 
--- 7.2.2
-
+-- update a column with the error value
 update trips set start_station_name = 'oops';
 
--- 7.2.3
-
+-- show the result
 select start_station_name as station
     ,count(*) as rides
 from trips
@@ -219,19 +178,17 @@ order by 2 desc
 limit 20;
 
 
--- 7.2.4
-
+-- run query to find the query ID of the last UPDATE command
 set query_id = 
 (select query_id from 
 table(information_schema.query_history_by_session (result_limit=>5)) 
 where query_text like 'update%' order by start_time limit 1);
 
--- 7.2.5
+-- roll back the table status
 create or replace table trips as
 (select * from trips before (statement => $query_id));
         
--- 7.2.6
-
+-- see the result
 select start_station_name as "station"
     ,count(*) as "rides"
 from trips
@@ -241,29 +198,26 @@ limit 20;
 
 
 /* *********************************************************************************** */
-/* *** MODULE 8  ********************************************************************* */
+/* *** Access Controls, account usage, and  Account Admin **************************** */
 /* *********************************************************************************** */
 
--- 8.1.1
-
+-- change the role
 use role accountadmin; 
 
--- 8.1.3 (NOTE - enter your unique user name into the second row below)
+-- create a role
+create role junior_dataengineer;
+grant role junior_dataengineer to user yuya;--YOUR_USER_NAME_GOES HERE;
 
-create role junior_dba;
-grant role junior_dba to user jeremyp;--YOUR_USER_NAME_GOES HERE;
+-- change the role
+use role junior_dataengineer;
 
--- 8.1.4
-
-use role junior_dba;
-
--- 8.1.6
-
+-- change the role
 use role accountadmin;
-grant usage on database citibike to role junior_dba;
-grant usage on database weather to role junior_dba;
 
--- 8.1.7
+-- grant the junior_dataengineer db accesses
+grant usage on database citibike to role junior_dataengineer;
+grant usage on database weather to role junior_dataengineer;
 
+-- change the role
 use role junior_dba;
 
