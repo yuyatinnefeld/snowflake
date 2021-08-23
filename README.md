@@ -1,4 +1,4 @@
-# snowflake
+# Snowflake
 
 ## getting started project
 [GCP Setup](https://github.com/yuyatinnefeld/snowflake/tree/main/getting-started)
