@@ -1,6 +1,4 @@
 # GCP + Snowflake Advanced Setup
-
-
 ## Create a GCP bucket and update a test csv file in the Cloud Storage
 
 ```bash
@@ -66,4 +64,6 @@ force=true;
 
 select * from job_tb
 ```
+
+## clustering
 
