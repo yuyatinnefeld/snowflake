@@ -125,4 +125,5 @@ copy into stackoverflow_tb from @my_gcs_stage
 file_format=stackoverflow_csv_format
 force=true;
 
+select * from stackoverflow_tb
 ```
