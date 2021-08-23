@@ -36,7 +36,6 @@ create or replace schema yt_schema;
 use role accountadmin;
 use warehouse analytics_wh;
 use schema public;
-
 ```
 ## Create a snowflake service account by Snowflake
 
@@ -52,10 +51,9 @@ storage_allowed_locations = ('gcs://yygcplearning-snowflake/')
 -- retrieve the cloud storage service account for your Snowflake Account
 desc storage integration gcp_int
 ```
+(ex. xxx@gcpeuropewest4-1-88d1.iam.gserviceaccount.com)
 
 ## Grant the Service Account Permissions to Access Bucket Objects
-copy the created STORAGE_GCP_SERVICE_ACCOUNT 
-(ex. xxx@gcpeuropewest4-1-88d1.iam.gserviceaccount.com)
 
 - GCP > IAM > ROLE > Create Role
 - Title: Snowflake Bucket Role
