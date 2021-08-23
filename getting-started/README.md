@@ -1,4 +1,4 @@
-# Getting Started
+# Snowflake Getting Started
 
 ## Create a DWH server and DB
 ```sql

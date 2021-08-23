@@ -1,6 +1,6 @@
 # Snowflake
 
-## getting started project
+## Snowflake getting started
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/getting-started)
 
 ## GCP cloud storage integration
