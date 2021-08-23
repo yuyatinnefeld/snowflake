@@ -3,7 +3,7 @@
 - Info:
 https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html
 
-## Create a snowflake service account by Snowflake
+## Initial Snowflake Setup
 ```sql
 
 -- create a dwh server / db / schema
@@ -17,6 +17,10 @@ use role accountadmin;
 use warehouse analytics_wh;
 use schema public;
 
+```
+## Create a snowflake service account by Snowflake
+
+```sql
 -- create gcp storage integration (USER ROLE has to be ACCOUNTADMIN)
 
 create storage integration gcp_int
