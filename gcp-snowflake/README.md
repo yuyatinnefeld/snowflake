@@ -37,13 +37,13 @@ desc storage integration gcp_yt_private_int
 copy the created STORAGE_GCP_SERVICE_ACCOUNT 
 (ex. euppnhvuuo@gcpeuropewest4-1-88d1.iam.gserviceaccount.com)
 
-GCP > IAM > ROLE > Create Role
-Title: Snowflake Bucket Role
-Add Permissions > Filter:
-    -- storage.buckets.get
-    -- storage.buckets.delete
-    -- storage.buckets.create
-    -- storage.buckets.list
+- GCP > IAM > ROLE > Create Role
+- Title: Snowflake Bucket Role
+- Add Permissions > Filter:
+  - storage.buckets.get
+  - storage.buckets.delete
+  - storage.buckets.create
+  - storage.buckets.list
 
 ## Assigning the Custom Role to the Cloud Storage Service Account
 
