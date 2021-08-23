@@ -3,7 +3,7 @@
 - Info:
 https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html
 
-## Initial Snowflake Setup
+## Setting Up the Snowflake Environment
 ```sql
 
 -- create a dwh server / db / schema
