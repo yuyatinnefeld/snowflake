@@ -55,7 +55,7 @@ desc storage integration gcp_int
 
 ## Grant the Service Account Permissions to Access Bucket Objects
 copy the created STORAGE_GCP_SERVICE_ACCOUNT 
-(ex. euppnhvuuo@gcpeuropewest4-1-88d1.iam.gserviceaccount.com)
+(ex. xxx@gcpeuropewest4-1-88d1.iam.gserviceaccount.com)
 
 - GCP > IAM > ROLE > Create Role
 - Title: Snowflake Bucket Role
@@ -72,7 +72,7 @@ copy the created STORAGE_GCP_SERVICE_ACCOUNT
 3. Click SHOW INFO PANEL
 4. Click Add Member
 
-- Service Account: euppnhvuuo@gcpeuropewest4-1-88d1.iam.gserviceaccount.com
+- Service Account: xxx@gcpeuropewest4-1-88d1.iam.gserviceaccount.com
 - Role: Storage Object Admin + Snowflake Bucket Role (custom)
 
 ## Granting the Cloud Storage Service Account Permissions on the Cloud Key Management Service Cryptographic Keys
@@ -86,7 +86,7 @@ This step is required only if your GCS bucket is encrypted using a key stored in
 ### Add Snowflake Service Accoujnt in the Key Management 
 - Select the created key
 - Click SHOW INFO PANEL in the upper-right corner
-- Add member: euppnhvuuo@gcpeuropewest4-1-88d1.iam.gserviceaccount.com
+- Add member: xxx@gcpeuropewest4-1-88d1.iam.gserviceaccount.com
 - Role:
   - Cloud KMS CrytoKey Encryptor
   - Cloud KMS CrytoKey Decryptor
