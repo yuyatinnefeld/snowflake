@@ -117,11 +117,11 @@ list @stackoverflow_gcp_stage;
 -- create a new table
 create or replace table stackoverflow_tb (num integer, age integer, framework string);
 
-
 -- data transport
 copy into stackoverflow_tb from @stackoverflow_gcp_stage
 file_format=stackoverflow_csv_format
 force=true;
 
+-- check the values
 select * from stackoverflow_tb
 ```
