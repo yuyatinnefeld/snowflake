@@ -52,8 +52,8 @@ Add Permissions > Filter:
 3. Click SHOW INFO PANEL
 4. Click Add Member
 
-(ex. euppnhvuuo@gcpeuropewest4-1-88d1.iam.gserviceaccount.com)
-Role = Storage Object Admin + Snowflake Bucket Role (custom)
+- Service Account: euppnhvuuo@gcpeuropewest4-1-88d1.iam.gserviceaccount.com
+- Role: Storage Object Admin + Snowflake Bucket Role (custom)
 
 ## Granting the Cloud Storage Service Account Permissions on the Cloud Key Management Service Cryptographic Keys
 This step is required only if your GCS bucket is encrypted using a key stored in the Google Cloud Key Management Service (Cloud KMS).
@@ -70,7 +70,6 @@ This step is required only if your GCS bucket is encrypted using a key stored in
 - Role:
   - Cloud KMS CrytoKey Encryptor
   - Cloud KMS CrytoKey Decryptor
-
 
 ## Create an External Stage
 
