@@ -1,9 +1,9 @@
-# GCP + Snowflake
+# GCP + Snowflake Integration
 
 - Info:
 https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html
 
-## create a GCP bucket and update a test csv file in the Cloud Storage
+## Create a GCP bucket and update a test csv file in the Cloud Storage
 
 ```bash
 cat stackoverflow.csv
@@ -50,7 +50,7 @@ enabled = true
 storage_allowed_locations = ('gcs://yygcplearning-snowflake/')
 
 -- retrieve the cloud storage service account for your Snowflake Account
-desc storage integration gcp_yt_private_int
+desc storage integration gcp_int
 ```
 
 ## Grant the Service Account Permissions to Access Bucket Objects
@@ -93,8 +93,8 @@ This step is required only if your GCS bucket is encrypted using a key stored in
 
 ## Create an External Stage
 
-GRANT CREATE STAGE ON SCHEMA yt_schema TO ROLE accountadmin;
-GRANT USAGE ON INTEGRATION gcp_yt_private_int TO ROLE accountadmin;
+grant create stage on schema public TO ROLE accountadmin;
+grant usage on integration gcp_yt_private_int TO ROLE accountadmin;
 
 ```sql
 use schema yt_db.public;
@@ -106,12 +106,12 @@ create or replace file format stackoverflow_csv_format
   SKIP_HEADER = 1;
 
 -- create a stackoverflow stage 
-create stage my_gcs_stage
+create stage stackoverflow_gcp_stage
   url = 'gcs://yygcplearning-snowflake/stackoverflow.csv '
   storage_integration  = gcp_int
   file_format  = stackoverflow_csv_format
   
-list @my_gcs_stage;
+list @stackoverflow_gcp_stage;
 ```
   
 ## Stage data into the table
@@ -121,7 +121,7 @@ create or replace table stackoverflow_tb (num integer, age integer, framework st
 
 
 -- data transport
-copy into stackoverflow_tb from @my_gcs_stage
+copy into stackoverflow_tb from @stackoverflow_gcp_stage
 file_format=stackoverflow_csv_format
 force=true;
 
