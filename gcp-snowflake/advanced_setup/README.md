@@ -15,7 +15,8 @@ gsutil cp ${LOCAL_FILE_PATH}/* gs://${BUCKET_NAME}
 
 ## Use the Env which is created in the getting-started session
 
-[Getting Started:](https://github.com/yuyatinnefeld/snowflake/tree/main/getting-started)
+If you do not create the dwh and create the gcp integration
+[Visit here:](https://github.com/yuyatinnefeld/snowflake/tree/main/getting-started)
 
 
 ```sql
