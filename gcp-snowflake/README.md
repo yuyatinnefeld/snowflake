@@ -1,9 +1,9 @@
-# GCP + Snowflake Integration
+# GCP (Cloud Storage) + Snowflake Integration
 
 - Info:
 https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html
 
-## Create a GCP bucket and update a test csv file in the Cloud Storage
+## Create a GCS bucket and update a test csv file in the Cloud Storage
 
 ```bash
 cat stackoverflow.csv
@@ -64,7 +64,6 @@ desc storage integration gcp_int
   - storage.buckets.list
 
 ## Assigning the Custom Role to the Cloud Storage Service Account
-
 1. Cloud Storage
 2. Select a bucket
 3. Click SHOW INFO PANEL
@@ -90,7 +89,6 @@ This step is required only if your GCS bucket is encrypted using a key stored in
   - Cloud KMS CrytoKey Decryptor
 
 ## Create an External Stage
-
 grant create stage on schema public TO ROLE accountadmin;
 grant usage on integration gcp_yt_private_int TO ROLE accountadmin;
 
