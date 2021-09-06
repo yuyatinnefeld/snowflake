@@ -92,7 +92,9 @@ Micro-partitioning is automatically performed on all Snowflake tables. Tables ar
 
 ## Clustering
 ```sql
-create or replace table job_clustering_tb (
+
+-- create a clustered table
+CREATE OR REPLACE TABLE job_clustering_tb (
     first_name VARCHAR(50), 
     last_name VARCHAR(50),
     email VARCHAR(100),
@@ -100,9 +102,22 @@ create or replace table job_clustering_tb (
     ts TIMESTAMP,
     job VARCHAR(100)
 ) 
-cluster by (job);
+CLUSTER BY (job);
 
-show tables like 'job_clustering_tb';
+SHOW TABLE LIKE 'job_clustering_tb';
+
+
+-- update a table with the clutering
+CREATE OR REPLACE TABLE emp_basic (
+  first_name STRING ,
+  last_name STRING ,
+  email STRING ,
+  streetaddress STRING ,
+  city STRING ,
+  start_date DATE
+  );
+
+ALTER TABLE emp_basic CLUSTER BY (TO_DATE(start_date));
 ```
 
 ### Automatic clustering
