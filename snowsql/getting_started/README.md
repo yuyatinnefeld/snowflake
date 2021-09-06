@@ -1,4 +1,4 @@
-# SnowSQL
+# SnowSQL Getting Started
 SnowSQL is the Snowflake command line client
 
 ## SnowSQL Install
@@ -129,4 +129,11 @@ warehousename = sf_tuts_wh
 3. create a connection
 ```bash
 snowsql -c my_test_connection
+snowsql -c my_test_connection -d sf_tuts -s public -q 'select * from emp_basic limit 10'
 ```
+
+
+
+
+
+
