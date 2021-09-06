@@ -104,3 +104,29 @@ DROP WAREHOUSE IF EXISTS sf_tuts_wh;
 ```sql
 !exit
 ```
+
+## Create a connection file
+
+1. create config file
+```sql
+cd ~/.snowsql/
+```
+
+2. update config file
+
+```bash
+vi config
+
+[connections.my_test_connection]
+accountname = hh66057.europe-west4.gcp
+username = YUYA
+password = xxxxxxxxxxxxxxxxxxxx
+dbname = sf_tuts
+schemaname = public
+warehousename = sf_tuts_wh
+```
+
+3. create a connection
+```bash
+snowsql -c my_test_connection
+```
