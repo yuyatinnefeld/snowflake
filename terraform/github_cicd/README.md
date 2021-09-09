@@ -4,6 +4,8 @@
 - Github Actions as CI/CD
 This guide shows how to build a simple CI/CD pipeline for Snowflake with GitHub Actions and Terraform
 
+## Info
+- https://quickstarts.snowflake.com/guide/devops_dcm_terraform_github/#0
 ## Setup a new Terraform workspace
 1. Login / Register
 https://app.terraform.io/app
