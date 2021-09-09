@@ -4,7 +4,6 @@
 - https://www.tableau.com/de-de/support/drivers?edition=pro&lang=de-de&platform=windows&cpu=64&version=2021.2&__full-version=20212.21.0605.1023#snowflake
 
 ## Download ODBC Driver
-
 - Help > Download > ODBC Driver > Snowflake Repository
 - https://sfc-repo.snowflakecomputing.com/odbc/index.html
 - Select the OS and version > Download
