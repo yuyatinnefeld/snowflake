@@ -12,8 +12,17 @@
 ## Snowflake + Tableau
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/tableau-snowflake)
 
-## Snowflake Performance Management
-[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/performance)
-
 ## Snowflake + Terraform
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/terraform)
+
+## Snowflake + Terraform + Github Actions 
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/terraform/github_cicd)
+
+## Snowflake Usage Monitoring
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/usage-monitoring)
+
+## Snowflake Billing Monitoring
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/billing-monitoring)
+
+## Snowflake Performance Management
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/performance)
