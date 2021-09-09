@@ -1,10 +1,19 @@
 # Snowflake
 
-## Snowflake getting started
+## Snowflake Getting started
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/getting-started)
 
-## GCP cloud storage integration
-[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/gcp-snowflake)
+## SnowSQL
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/snowsql)
+
+## Snowflake + GCP Cloud Stroage
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/gcp-snowflake/cloud-storage)
+
+## Snowflake + Tableau
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/tableau-snowflake)
 
 ## Snowflake Performance Management
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/performance)
+
+## Snowflake + Terraform
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/terraform)
