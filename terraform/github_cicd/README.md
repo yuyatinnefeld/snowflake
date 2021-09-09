@@ -30,9 +30,6 @@ Variable key
 - Description: GitHub Actions
 - You need to save the API token
 
-
- tL3P1fVu1OrkuQ.atlasv1.IyshlhDQgcFyrL8DMoCCDYx8g6CdtzFNTZoARe2ptzPYvUHiidOwUqtq3h6zqzoyqsg
-
 ## Create the Actions Workflow
 
 ### Create a Actions Secrets
