@@ -4,7 +4,7 @@
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/getting-started)
 
 ## SnowSQL
-[More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/snowsql)
+[More Info](https://github.com/yuyatinnefeld/snowflake/tree/master/snowsql/getting_started)
 
 ## Snowflake + GCP Cloud Stroage
 [More Info](https://github.com/yuyatinnefeld/snowflake/tree/main/gcp-snowflake/cloud-storage)
