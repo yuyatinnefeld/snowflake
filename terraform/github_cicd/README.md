@@ -1,4 +1,7 @@
-# Snowflake + Terraform (Database Change Management) + Github Actions (CI/CD)
+# Snowflake + Terraform + Github Actions
+- Snowflake as DWH
+- Terraform as Database Change Management
+- Github Actions as CI/CD
 This guide shows how to build a simple CI/CD pipeline for Snowflake with GitHub Actions and Terraform
 
 ## Setup a new Terraform workspace
