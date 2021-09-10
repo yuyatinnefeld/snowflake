@@ -46,10 +46,10 @@ git push origin main
 - SF_ROLE = SYSADMIN
 - SF_WAREHOUSE = COMPUTE_WH
 - SF_DATABASE = DEMO_DB
-- SNOWFLAKE_PASSWORD = Fxxxxxx
+- SF_PASSWORD = Fxxxxxx
 
 
-![GitHub Logo](/images/actions_secrets.png)
+![GitHub Logo](/images/actions-secrets.png)
 
 ## Create Action Workflow
 
