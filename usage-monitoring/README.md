@@ -6,8 +6,6 @@ This guide represents how to monitorize queries and warehouse to optimize query 
 USE ROLE ACCOUNTADMIN;
 
 GRANT IMPORTED PRIVILEGES ON DATABASE snowflake TO ROLE SYSADMIN;
-GRANT IMPORTED PRIVILEGES ON DATABASE snowflake TO ROLE customrole1;
-
 
 USE ROLE SYSADMIN;
 
