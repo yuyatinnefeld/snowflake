@@ -38,7 +38,7 @@ access_token_secret="*********************************************"\
 bucket="my-twitter-bucket-ytinnefeld"\
 
 # specify your own default twitter keyword here.
-keyword="covid19"
+keyword="bitcoin"
 
 ```
 
