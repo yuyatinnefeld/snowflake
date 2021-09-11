@@ -77,8 +77,8 @@ docker run --name <YOUR_CONTAINER_NAME> snowflake-twitter:latest <YOUR_TWITTER_K
 ```
 <YOUR_TWITTER_KEYWORD>: Tweets will be pulled only if they contain this hashtag. That keyword overrides the default keyword specified in your Dockerfile.
 ```bash
-# example contaienr name = twitter-success, keyword = bitcoin
-docker run --name twitter-success snowflake-twitter:latest bitcoin
+# example contaienr name = twitter-bitcoin, keyword = bitcoin
+docker run --name twitter-bitcoin snowflake-twitter:latest bitcoin
 ```
 
 6. Configure Snowpipe in Snowflake
