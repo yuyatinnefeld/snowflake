@@ -45,19 +45,19 @@ keyword="bitcoin"
 3. Setup the stage (Snowflake)
 ```sql
 /*********************************************************************************
-Create external S3 stage pointing to the S3 buckets storing the tweets
+Create storage (database) to store the tweets
+Create compute (warehouse) to run analytical queries on the tweets
 *********************************************************************************/
+use role accountadmin;
 
-use role accountadmin
-use warehouse compute_wh
-create or replace database twitter_db
-create or replace STAGE twitter_db.public.tweets
-URL = 's3://my-twitter-bucket-ytinnefeld/'
-CREDENTIALS = (AWS_KEY_ID = 'xxxxxxxxxxxxxxxxxxxx'
-AWS_SECRET_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-file_format=(type='JSON')
-COMMENT = 'Tweets stored in S3';
+create or replace warehouse twitter_wh
+  with warehouse_size = 'x-small'
+  auto_suspend = 300
+  auto_resume = true
+  initially_suspended = true;
 
+CREATE OR REPLACE DATABASE twitter_db;
+USE SCHEMA twitter_db.public;
 ```
 
 4. Build the Image
@@ -83,8 +83,43 @@ docker run --name twitter-bitcoin snowflake-twitter:latest bitcoin
 
 6. Configure Snowpipe in Snowflake
 
-6.1. Login into the Snowflake account
-6.2. Query 0_setup_twitter_snowpipe.sql script
+6.1. Query the rest of 0_setup_twitter_snowpipe.sql script
+
+```sql
+
+/*********************************************************************************
+Create external S3 stage pointing to the S3 buckets storing the tweets
+*********************************************************************************/
+
+
+create or replace STAGE twitter_db.public.tweets
+URL = 's3://my-twitter-bucket-ytinnefeld/'
+CREDENTIALS = (AWS_KEY_ID = 'xxxxxxxxxxxxxxxxxxxx'
+AWS_SECRET_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+file_format=(type='JSON')
+COMMENT = 'Tweets stored in S3';
+
+/*********************************************************************************
+Create new table for storing JSON data in native format into a VARIANT column
+*********************************************************************************/
+create or replace table tweets(tweet variant);
+
+/*********************************************************************************
+Create pipe for auto-ingesting tweets from S3 into the "tweets" Snowflake table
+*********************************************************************************/
+
+create or replace pipe twitter_db.public.tweetpipe auto_ingest=true as
+    copy into twitter_db.public.tweets
+    from @twitter_db.public.tweets
+    file_format=(type='JSON');
+
+/*********************************************************************************
+Check that the pipe is created
+Copy the notification_channel value of the pipe
+*********************************************************************************/
+show pipes;
+```
+
 6.3. Make sure to configure event notifications in AWS S3 as described here.
 
 7. stop the docker container
