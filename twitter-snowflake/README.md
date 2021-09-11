@@ -33,7 +33,7 @@ access_token_secret="*********************************************"\
 
 ```bash
 #AWS bucket name
-bucket="my-twitter-bucket"\
+bucket="my-twitter-bucket-ytinnefeld"\
 
 # specify your own default twitter keyword here.
 keyword="covid19"
@@ -50,7 +50,7 @@ use role accountadmin
 use warehouse compute_wh
 create or replace database twitter_db
 create or replace STAGE twitter_db.public.tweets
-URL = 's3://my-twitter-bucket/'
+URL = 's3://my-twitter-bucket-ytinnefeld/'
 CREDENTIALS = (AWS_KEY_ID = 'xxxxxxxxxxxxxxxxxxxx'
 AWS_SECRET_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 file_format=(type='JSON')
