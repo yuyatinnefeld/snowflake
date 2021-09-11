@@ -80,6 +80,8 @@ docker run --name <YOUR_CONTAINER_NAME> snowflake-twitter:latest <YOUR_TWITTER_K
 # example contaienr name = twitter-bitcoin, keyword = bitcoin
 docker run --name twitter-bitcoin snowflake-twitter:latest bitcoin
 ```
+Running this command will provide an output that takes this form:
+
 
 6. Configure Snowpipe in Snowflake
 
@@ -104,20 +106,12 @@ Create new table for storing JSON data in native format into a VARIANT column
 *********************************************************************************/
 create or replace table tweets(tweet variant);
 
-/*********************************************************************************
-Create pipe for auto-ingesting tweets from S3 into the "tweets" Snowflake table
-*********************************************************************************/
+list @twitter_db.public.tweets;
 
-create or replace pipe twitter_db.public.tweetpipe auto_ingest=true as
-    copy into twitter_db.public.tweets
-    from @twitter_db.public.tweets
-    file_format=(type='JSON');
+copy into tweets from @twitter_db.public.tweets file_format=(type='JSON');
 
-/*********************************************************************************
-Check that the pipe is created
-Copy the notification_channel value of the pipe
-*********************************************************************************/
-show pipes;
+select * from tweets
+
 ```
 
 6.3. Make sure to configure event notifications in AWS S3 as described here.
