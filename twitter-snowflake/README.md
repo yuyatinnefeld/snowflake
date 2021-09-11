@@ -10,6 +10,8 @@ Twitter Developer: https://developer.twitter.com/en
 Github Repo: https://github.com/Snowflake-Labs/sfguide-twitter-auto-ingest
 
 ## Setup
+0. Create a S3 bucket
+ex. my-twitter-bucket-ytinnefeld
 
 1. Download the repo
 ```bash
