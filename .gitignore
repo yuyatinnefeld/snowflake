@@ -3,3 +3,5 @@ snowsql_rt.log*
 snowsql/__MACOSX*
 getting-started.zip
 /data
+venv
+.env
