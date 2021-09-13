@@ -2,13 +2,14 @@ import snowflake.connector
 from decouple import config
 from util_ddl import (create_cursor, close_cursor, create, create_table, drop)
 from util_dml import (insert, insert_csv, select)
+from user_management import (create_user, create_role, grant_user, listing_user, drop_user)
+from usage_warehouse import warehouse_metering_history, warehouse_events_history, warehouse_load_history
 
+def create_connection():
+    user = config('SF_USER')
+    password = config('SF_PASSWORD')
+    account = config('SF_ACCOUNT')
 
-user = config('SF_USER')
-password = config('SF_PASSWORD')
-account = config('SF_ACCOUNT')
-
-if __name__ == '__main__':
     conn = snowflake.connector.connect(
         user=user,
         password=password,
@@ -17,6 +18,10 @@ if __name__ == '__main__':
         'QUERY_TAG': 'python:yt:local',
         }
     )
+    return conn
+
+if __name__ == '__main__':
+    conn = create_connection()
 
     cs = create_cursor(conn)
     cs.execute("USE ROLE ACCOUNTADMIN")
