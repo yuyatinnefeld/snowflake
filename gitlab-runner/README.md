@@ -1,5 +1,8 @@
 # Gitlab CICD + Snowflake
 
+customized github-actions + schemachange for gitlab runner
+Details: https://github.com/yuyatinnefeld/snowflake/tree/master/github-actions
+
 ## Setup
 
 1. create a gitlab project

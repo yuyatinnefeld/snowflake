@@ -1,8 +1,6 @@
 from util_connection import create_connection, create_cursor, close_cursor
 from util_ddl import (create, create_table, drop)
 from util_dml import (insert, insert_csv, select)
-from user_management import (create_user, create_role, grant_user, listing_users, drop_user, drop_role)
-from usage_warehouse import warehouse_metering_history, warehouse_events_history, warehouse_load_history
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
-from user_management import (create_user, create_role, grant_user, listing_users, drop_user, drop_role)
 from util_connection import create_connection, create_cursor, close_cursor
+from util_user_management import (create_user, create_role, grant_user, listing_users, drop_user, drop_role)
 
 
 if __name__ == '__main__':

@@ -52,7 +52,7 @@ result = cs.execute("SELECT CUST_ID, CHURN, STATE, ACCOUNT_LENGTH, AREA_CODE, IN
 
 col = ['CUST_ID', 'CHURN', 'STATE', 'ACCOUNT_LENGTH', 'AREA_CODE', 'INTERNATIONAL', 'VOICEMAIL_PLAN'. 'NUM_VM_MESSAGES', 'TOTAL_DAY_MINS', 'TOTAL_DAY_CALLS']
 
-df = pd.DataFrame(query, columns=col)
+df = pd.DataFrame(result, columns=col)
 print(df)
 
 cs.close()
