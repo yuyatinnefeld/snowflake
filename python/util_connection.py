@@ -24,6 +24,7 @@ def create_cursor(conn: conn.SnowflakeConnection) -> cursor.SnowflakeCursor:
     try:
         cs = conn.cursor()
         print("✨ connection successful ✨")
+        cs.execute("USE ROLE ACCOUNTADMIN")
         return cs
     except:
         print("connection not successful")

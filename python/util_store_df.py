@@ -8,3 +8,7 @@ def store_df_to_csv(df:pd.DataFrame, file_name:str):
 def store_df_to_json(df:pd.DataFrame, file_name:str):
     file_path = f"data/output/{file_name}.json"
     df.to_json(file_path)
+
+def store_df_to_xlsx(df:pd.DataFrame, file_name:str):
+    file_path = f"data/output/{file_name}.xlsx"
+    df.to_excel(file_path)
