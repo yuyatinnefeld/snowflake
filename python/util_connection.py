@@ -3,7 +3,7 @@ import snowflake.connector
 import snowflake.connector.connection as conn
 import snowflake.connector.cursor as cursor
 
-### TODO: this must OBJECT! to avoid call every time the conn
+#TODO: this must OBJECT! to avoid call every time the conn
 
 def create_connection():
     user = config('SF_USER')

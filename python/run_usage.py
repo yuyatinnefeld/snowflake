@@ -1,5 +1,6 @@
 from util_connection import create_connection, create_cursor, close_cursor
 from util_account_usage import account_usage
+from util_store_df import store_df_to_csv, store_df_to_json
 
 
 if __name__ == '__main__':
@@ -11,14 +12,11 @@ if __name__ == '__main__':
     account_usage_kpis= ["DATABASES", "QUERY_HISTORY", "DATABASE_STORAGE_USAGE_HISTORY", "TASK_HISTORY", "WAREHOUSE_LOAD_HISTORY","DATA_TRANSFER_HISTORY", 
     "LOAD_HISTORY", "STAGE_STORAGE_USAGE_HISTORY", "STORAGE_USAGE", "TABLE_STORAGE_METRICS", "WAREHOUSE_EVENTS_HISTORY", "WAREHOUSE_METERING_HISTORY"]
 
-    #TODO: 2. save the df as json
-    # [save_df_as_json(usage_category) for usage_category in account_usage_kpis]
+    def df_extract_load(cs, file_name:str):
+        df = account_usage(cs, file_name)
+        store_df_to_csv(df, file_name)
 
-
-    df = account_usage(cs, "WAREHOUSE_LOAD_HISTORY")
-    #TODO: 1. create a save_df_as_json(usage_category)
-
-    print(df.head())
+    [df_extract_load(cs, file_name) for file_name in account_usage_kpis]
 
     close_cursor(conn)
     conn.close()
