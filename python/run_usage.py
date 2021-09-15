@@ -12,11 +12,11 @@ if __name__ == '__main__':
     account_usage_kpis= ["DATABASES", "QUERY_HISTORY", "DATABASE_STORAGE_USAGE_HISTORY", "TASK_HISTORY", "WAREHOUSE_LOAD_HISTORY","DATA_TRANSFER_HISTORY", 
     "LOAD_HISTORY", "STAGE_STORAGE_USAGE_HISTORY", "STORAGE_USAGE", "TABLE_STORAGE_METRICS", "WAREHOUSE_EVENTS_HISTORY", "WAREHOUSE_METERING_HISTORY"]
 
-    def df_extract_load(cs, file_name:str):
+    def df_extract_store(cs, file_name:str):
         df = account_usage(cs, file_name)
         store_df_to_csv(df, file_name)
 
-    [df_extract_load(cs, file_name) for file_name in account_usage_kpis]
+    [df_extract_store(cs, file_name) for file_name in account_usage_kpis]
 
     close_cursor(conn)
     conn.close()
