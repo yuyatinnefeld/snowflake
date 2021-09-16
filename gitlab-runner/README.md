@@ -11,7 +11,7 @@ Details: https://github.com/yuyatinnefeld/snowflake/tree/master/github-actions
 
 3. create .gitlab-ci.yml
 
-4. setup the variables by pipeline run
+4. setup the variables
 - SF_ACCOUNT
 - SF_USERNAME
 - SF_ROLE
