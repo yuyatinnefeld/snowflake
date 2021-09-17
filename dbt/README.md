@@ -354,7 +354,7 @@ dbt docs generate --no-version-check
 dbt docs serve
 ```
 
-2.open: http://localhost:8080
+2. open: http://localhost:8080
 
 3. verify the result by snowflake
 ```sql
