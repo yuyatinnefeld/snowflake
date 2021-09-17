@@ -348,14 +348,15 @@ dbt run --model +tfm_stock_history_major_currency --no-version-check
 ### See the dbt documentation (DAG)
 
 ![GitHub Logo](/images/dbt-dag.png)
-
+1. create a documentation 
 ```bash
 dbt docs generate --no-version-check
 dbt docs serve
 ```
-open: http://localhost:8080
 
-2. verify the result by snowflake
+2.open: http://localhost:8080
+
+3. verify the result by snowflake
 ```sql
 SELECT * 
   FROM dbt_hol_dev.l20_transform.tfm_stock_history_major_currency
