@@ -64,7 +64,7 @@ dbt_hol:
       
       user: YUYA
       ######## Please replace with your Snowflake dbt user password
-      password: Fireflake123
+      password: xxxx
       
       role: ACCOUNTADMIN
       database: dbt_hol_dev
@@ -78,7 +78,7 @@ dbt_hol:
       
       user: YUYA
       ######## Please replace with your Snowflake dbt user password
-      password: Fireflake123
+      password: xxxx
       
       role: ACCOUNTADMIN
       database: dbt_hol_prod
