@@ -64,7 +64,7 @@ dbt_hol:
       
       user: YUYA
       ######## Please replace with your Snowflake dbt user password
-      password: Fireflake123
+      password: xxxx
       
       role: ACCOUNTADMIN
       database: dbt_hol_dev
@@ -78,7 +78,7 @@ dbt_hol:
       
       user: YUYA
       ######## Please replace with your Snowflake dbt user password
-      password: Fireflake123
+      password: xxxx
       
       role: ACCOUNTADMIN
       database: dbt_hol_prod
@@ -89,9 +89,8 @@ dbt_hol:
 
 4. update the dbt_project.yml
 
-project nema: dbt_hol
-
-name, profile, models: my_new_project > dbt_hol
+- project nema: dbt_hol
+- replace "name", "profile", "models" fro my_new_project to dbt_hol
 
 ```yml
 
@@ -348,14 +347,15 @@ dbt run --model +tfm_stock_history_major_currency --no-version-check
 ### See the dbt documentation (DAG)
 
 ![GitHub Logo](/images/dbt-dag.png)
-
+1. create a documentation 
 ```bash
 dbt docs generate --no-version-check
 dbt docs serve
 ```
-open: http://localhost:8080
 
-2. verify the result by snowflake
+2. open: http://localhost:8080
+
+3. verify the result by snowflake
 ```sql
 SELECT * 
   FROM dbt_hol_dev.l20_transform.tfm_stock_history_major_currency
