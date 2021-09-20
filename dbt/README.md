@@ -89,9 +89,8 @@ dbt_hol:
 
 4. update the dbt_project.yml
 
-project nema: dbt_hol
-
-name, profile, models: my_new_project > dbt_hol
+- project nema: dbt_hol
+- replace "name", "profile", "models" fro my_new_project to dbt_hol
 
 ```yml
 
