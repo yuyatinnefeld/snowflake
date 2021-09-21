@@ -57,8 +57,10 @@ dbt_sf_monitoring:
 image: registry.gitlab.com/gitlab-data/data-image/dbt-image:v0.0.15
 
 before_script:
+  - export SF_ACCOUNT=$SF_ACCOUNT
+  - export SF_USER=$SF_USER  
+  - export SF_ROLE=$SF_ROLE
   - export SF_PASSWORD=$SF_PASSWORD
-  - export SF_USER=$SF_USER
   - export CI_PROFILE_TARGET="--profiles-dir profile --target dev"
   - echo $CI_PROFILE_TARGET
 
