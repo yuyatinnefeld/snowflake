@@ -51,9 +51,14 @@ dbt_sf_monitoring:
       schema: public
       threads: 200
 ```
-4. create GitLab CIfile
+4. create .gitlab-ci.yml file
 
 ```yml
+stages:
+  - build
+  - test
+  - deploy
+  
 image: registry.gitlab.com/gitlab-data/data-image/dbt-image:v0.0.15
 
 before_script:
@@ -62,7 +67,9 @@ before_script:
   - export SF_ROLE=$SF_ROLE
   - export SF_PASSWORD=$SF_PASSWORD
   - export CI_PROFILE_TARGET="--profiles-dir profile --target dev"
+  - export PROD_PROFILE_TARGET="--profiles-dir profile --target prod"
   - echo $CI_PROFILE_TARGET
+  - echo $PROD_PROFILE_TARGET
 
 after_script:
   - echo "❄️OK❄️"
@@ -81,15 +88,24 @@ test1 🦖:
 
 test2 🐭:
   stage: test
+  needs: [test1 🦖]
   script:
     - echo "❄️config test❄️"
     - dbt test $CI_PROFILE_TARGET
 
-deploy1 🚀:
+dev deploy ⚡:
   stage: deploy
   script:
     - echo "❄️ deploy ❄️"
     - dbt run $CI_PROFILE_TARGET
+  when: manual
+
+prod deploy 🚀:
+  stage: deploy
+  script:
+    - echo "❄️ deploy to production ❄️"
+    - dbt seed $PROD_PROFILE_TARGET
+    - dbt run $PROD_PROFILE_TARGET
   when: manual
 ```
 
