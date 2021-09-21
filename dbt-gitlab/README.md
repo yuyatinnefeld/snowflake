@@ -96,7 +96,7 @@ test2 🐭:
 dev deploy ⚡:
   stage: deploy
   script:
-    - echo "❄️ deploy ❄️"
+    - echo "❄️ deploy to development ❄️"
     - dbt run $CI_PROFILE_TARGET
   when: manual
 
